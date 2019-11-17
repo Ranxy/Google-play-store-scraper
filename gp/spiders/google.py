@@ -65,8 +65,8 @@ class GoogleSpider(scrapy.Spider):
     def parse_app(self, response):
         item = GpItem()
         item['app_url'] = response.url
-        item['app_name'] = response.xpath('//h1[@itemprop="name"]').xpath('text()').extract()
-        item['app_icon'] = response.xpath('//img[@itemprop="image"]/@src')
+        item['app_name'] = response.xpath('//h1[@itemprop="name"]/span').xpath('text()').get()
+        item['app_icon'] = response.xpath('//img[@itemprop="image"]/@src').get()
         # item['app_developer'] = response.xpath('//')
         # print(response.text)
         yield item
